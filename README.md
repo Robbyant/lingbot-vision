@@ -9,10 +9,10 @@ Robbyant Team
 <div align="center">
 
 [![PDF](https://img.shields.io/static/v1?label=Paper&message=PDF&color=red&logo=adobeacrobatreader)](https://github.com/Robbyant/lingbot-vision/blob/main/paper.pdf)
-![arXiv](https://img.shields.io/static/v1?label=Paper&message=arXiv%20coming%20soon&color=lightgrey&logo=arxiv)
+[![arXiv](https://img.shields.io/static/v1?label=Paper&message=arXiv&color=lightgrey&logo=arxiv)](https://arxiv.org/abs/2607.05247)
 [![Project](https://img.shields.io/badge/Project-Website-blue)](https://technology.robbyant.com/lingbot-vision)
 [![HuggingFace](https://img.shields.io/static/v1?label=%F0%9F%A4%97%20Model&message=HuggingFace&color=orange)](https://huggingface.co/collections/robbyant/lingbot-vision)
-![ModelScope](https://img.shields.io/static/v1?label=%F0%9F%A4%96%20Model&message=ModelScope%20coming%20soon&color=purple)
+[![ModelScope](https://img.shields.io/static/v1?label=%F0%9F%A4%96%20Model&message=ModelScope&color=purple)](https://www.modelscope.cn/collections/Robbyant/LingBot-Vision)
 [![License](https://img.shields.io/badge/License-Apache--2.0-green)](LICENSE)
 
 </div>
