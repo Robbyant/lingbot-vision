@@ -60,7 +60,9 @@ Config files are packaged under `lingbot_vision/configs/` and selected automatic
 
 ## 🔧 Installation
 
-**Requirements**: Python ≥ 3.10 · PyTorch ≥ 2.0 · CUDA-capable GPU (recommended for large-model inference)
+**Requirements**: Python ≥ 3.10 · PyTorch ≥ 2.0 · a CUDA- or ROCm-capable GPU (recommended for large-model inference)
+
+> **AMD GPUs (ROCm)**: LingBot-Vision runs unchanged on AMD GPUs via ROCm — see [Running on AMD ROCm](#-running-on-amd-rocm).
 
 **1. Clone the repository**
 
@@ -82,6 +84,27 @@ conda activate lingbot-vision
 python -m pip install -r requirements.txt
 python -m pip install -e .
 ```
+
+## 🟥 Running on AMD ROCm
+
+LingBot-Vision runs **out of the box on AMD GPUs via ROCm with zero source changes**. The default attention path (`torch.nn.functional.scaled_dot_product_attention`, backend `sdpa`) is auto-dispatched to PyTorch's AOTriton Flash Attention kernel on ROCm, so `lingbot_vision/attention.py` works unchanged. The pure-PyTorch stack (`torch/torchvision/numpy/opencv-python-headless/pillow/omegaconf/huggingface_hub`, no custom CUDA/C++ extension, no `xformers`/`flash-attn`) has nothing CUDA-specific to build.
+
+Verified on an AMD Instinct MI300X (gfx942) using the official ROCm PyTorch image `rocm/pytorch:rocm6.4.3_ubuntu24.04_py3.12_pytorch_release_2.6.0` (torch 2.6.0, HIP 6.4), where `torch.cuda.is_available() == True`:
+
+```bash
+# The ROCm PyTorch image already provides torch/torchvision — install the rest.
+python -m pip install numpy opencv-python-headless pillow omegaconf huggingface_hub
+python -m pip install -e .
+
+# Recommended ViT-L backbone (weights auto-download from Hugging Face).
+python -m lingbot_vision.pca_demo \
+  --config-file lingbot_vision/configs/lbot_vision_vitl.yaml \
+  --ckpt /path/to/model.pt \
+  --input examples/example.png \
+  --out outputs/pca_demo --size 512 --mode square --dtype bf16
+```
+
+Both the recommended ViT-L and the flagship 1.1B ViT-g backbones load with 0 missing / 0 unexpected keys and produce the expected PCA-of-patch-token maps. On ROCm, PyTorch may print `Using AOTriton backend for Flash Attention forward` — this is expected and requires no changes.
 
 ## 🚀 Quick Start
 
