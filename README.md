@@ -37,6 +37,8 @@ LingBot-Vision learns boundaries, shapes, and semantic regions all together, mak
 
 ## 🌊 Meet LingBot-Depth 2.0
 
+By simply replacing the encoder with LingBot-Vision at the ViT-L/16 and ViT-g/16 scales, and scaling the curated RGB-D training corpus from 3M to 150M samples, LingBot-Depth 2.0 achieves substantial performance gains over the previous and other system, as detailed in the technical report.
+
 ![LingBot-Depth 2.0 on mirror and glass scenes](./assets/lingbot_depth2_mirror_glass.jpg)
 
 <sub>**LingBot-Depth 2.0 on mirror and glass scenes.** Each group shows input RGB, raw sensor depth, refined depth, and refined point clouds. Raw depth is missing on difficult surfaces such as window panes, glass balustrades, and reflective floors. LingBot-Depth 2.0 completes these regions as stable, contiguous surfaces across frames.</sub>
@@ -47,16 +49,16 @@ LingBot-Vision learns boundaries, shapes, and semantic regions all together, mak
 
 We train a ViT-g/16 teacher with roughly 1.1B parameters and distill ViT-L, ViT-B, and ViT-S backbones from it for inference and downstream use. Full training and evaluation details are covered in the technical report.
 
-All released weights are **backbone-only** `.pt` checkpoints, stored as `model.pt` in each Hugging Face model repository (see the full [collection](https://huggingface.co/collections/robbyant/lingbot-vision)):
+All released weights are **backbone-only** `.pt` checkpoints, stored as `model.pt` in each model repository (see the full [Hugging Face collection](https://huggingface.co/collections/robbyant/lingbot-vision)):
 
-| Model | Backbone | Embed dim | Weights | Config |
-|-------|----------|----------:|---------|--------|
-| **LingBot-Vision-Giant**<br><sub>highest-quality dense features</sub> | ViT-g/16 · SwiGLU · fp32 RoPE · 4 register tokens | 1536 | [🤗 vit-giant](https://huggingface.co/robbyant/lingbot-vision-vit-giant) | `lingbot_vision/configs/lbot_vision_vitg.yaml` |
-| **LingBot-Vision-Large** ⭐<br><sub>recommended: strong features, practical inference</sub> | ViT-L/16, distilled from Giant | 1024 | [🤗 vit-large](https://huggingface.co/robbyant/lingbot-vision-vit-large) | `lingbot_vision/configs/lbot_vision_vitl.yaml` |
-| **LingBot-Vision-Base**<br><sub>balanced inference cost</sub> | ViT-B/16, distilled from Giant | 768 | [🤗 vit-base](https://huggingface.co/robbyant/lingbot-vision-vit-base) | `lingbot_vision/configs/lbot_vision_vitb.yaml` |
-| **LingBot-Vision-Small**<br><sub>lightweight demos and downstream use</sub> | ViT-S/16, distilled from Giant | 384 | [🤗 vit-small](https://huggingface.co/robbyant/lingbot-vision-vit-small) | `lingbot_vision/configs/lbot_vision_vits.yaml` |
+| Model | Backbone | Embed dim | Hugging Face Weights | ModelScope Weights |
+|-------|----------|----------:|----------------------|--------------------|
+| **LingBot-Vision-Giant**<br><sub>highest-quality dense features</sub> | ViT-g/16 · SwiGLU · fp32 RoPE · 4 register tokens | 1536 | [vit-giant](https://huggingface.co/robbyant/lingbot-vision-vit-giant) | [vit-giant](https://www.modelscope.cn/models/Robbyant/lingbot-vision-vit-giant) |
+| **LingBot-Vision-Large** ⭐<br><sub>recommended: strong features, practical inference</sub> | ViT-L/16, distilled from Giant | 1024 | [vit-large](https://huggingface.co/robbyant/lingbot-vision-vit-large) | [vit-large](https://www.modelscope.cn/models/Robbyant/lingbot-vision-vit-large) |
+| **LingBot-Vision-Base**<br><sub>balanced inference cost</sub> | ViT-B/16, distilled from Giant | 768 | [vit-base](https://huggingface.co/robbyant/lingbot-vision-vit-base) | [vit-base](https://www.modelscope.cn/models/Robbyant/lingbot-vision-vit-base) |
+| **LingBot-Vision-Small**<br><sub>lightweight demos and downstream use</sub> | ViT-S/16, distilled from Giant | 384 | [vit-small](https://huggingface.co/robbyant/lingbot-vision-vit-small) | [vit-small](https://www.modelscope.cn/models/Robbyant/lingbot-vision-vit-small) |
 
-> 🚧 ModelScope mirrors: coming soon.
+Config files are packaged under `lingbot_vision/configs/` and selected automatically by `load_pretrained_backbone`.
 
 ## 🔧 Installation
 
