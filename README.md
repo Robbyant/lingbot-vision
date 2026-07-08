@@ -183,7 +183,7 @@ LingBot-Vision is part of the LingBot spatial perception effort. We thank [DINOv
 
 ## 📮 Contact
 
-For questions, discussions, or collaborations:
+For questions, discussions, or collaborations: 
 
 - **Issues**: Open an [issue](https://github.com/robbyant/lingbot-vision/issues) on GitHub
 - **Email**: Contact [Zelin Fu](https://github.com/TakuLingFu) (fuzelin.fzl@antgroup.com) or [Nan Xue](https://xuenan.net) (xuenan@ieee.org)
